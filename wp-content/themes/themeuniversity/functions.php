@@ -20,6 +20,7 @@ add_action('wp_enqueue_scripts', 'theme_style');
 
 if (! function_exists('mytheme_register_nav_menu')) {
 
+	
 	function mytheme_register_nav_menu()
 	{
 		register_nav_menus(array(
@@ -29,6 +30,7 @@ if (! function_exists('mytheme_register_nav_menu')) {
 	}
 	add_action('after_setup_theme', 'mytheme_register_nav_menu', 0);
 }
-add_theme_support('post-thumbnails');
 
+
+add_theme_support('post-thumbnails');
 

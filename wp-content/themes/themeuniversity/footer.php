@@ -5,28 +5,28 @@
             <h1 class="school-logo-text school-logo-text--alt-color">
               <a href="#"><strong>Fictional</strong> University</a>
             </h1>
-            <p><a class="site-footer__link" href="#">555.555.5555</a></p>
+            <p><a class="site-footer__link" href="#"></a></p>
           </div>
 
           <div class="site-footer__col-two-three-group">
             <div class="site-footer__col-two">
               <h3 class="headline headline--small">Explore</h3>
-              <!-- <nav class="nav-list">
+              <nav class="nav-list">
                 <ul>
                   <li><a href="#">About Us</a></li>
                   <li><a href="#">Programs</a></li>
                   <li><a href="#">Events</a></li>
                   <li><a href="#">Campuses</a></li>
                 </ul>
-              </nav> -->
-              <?php 
+              </nav>
+              <!-- <?php 
                 wp_nav_menu(array(
                   'theme_location' => 'Menu Footer_1',
                   'container'            => 'nav',
                   'container_class'      => 'nav-list',
         
                 ));
-              ?>
+              ?> -->
             </div>
 
             <div class="site-footer__col-three">
