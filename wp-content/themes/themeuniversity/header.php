@@ -12,32 +12,33 @@
   <header class="site-header">
     <div class="container">
       <h1 class="school-logo-text float-left">
-        <?php 
-          $siteName =  get_bloginfo('title'); 
-         ?>
-        <a href="<?php echo site_url('/'); ?>"> <strong> HUEIC </strong>industrial college</a>
+        <?php
+        $sitename = get_bloginfo('name');
+        $fictional = explode(" ", $sitename);
+        // Ensure there's more than one word
+        if (count($fictional) > 1) {
+          echo '<a href="/university"><strong>' . $fictional[0] . '</strong> ' . $fictional[1] . '</a>';
+        } else {
+          echo '<a href="#"><strong>' . $sitename . '</strong></a>';
+        }
+        ?>
       </h1>
+
+      <!-- Search and Menu Icons -->
       <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
       <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
-      <div class="site-header__menu group">
-        <!-- <nav class="main-navigation">
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Programs</a></li>
-              <li><a href="#">Events</a></li>
-              <li><a href="#">Campuses</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-          </nav> -->
+
+      <!-- Main Navigation Menu -->
+      <div class="site-header__menu group menu-container">
         <?php
         wp_nav_menu(array(
           'theme_location' => 'primary_menu',
-          'container'            => 'nav',
-          'container_class'      => 'main-navigation',
-
+          'container'      => 'nav',
+          'container_class'=> 'main-navigation',
         ));
-
         ?>
+        
+        <!-- Utility Links -->
         <div class="site-header__util">
           <a href="#" class="btn btn--small btn--orange float-left push-right">Login</a>
           <a href="#" class="btn btn--small btn--dark-orange float-left">Sign Up</a>
@@ -45,5 +46,25 @@
         </div>
       </div>
     </div>
-    
+
+    <!-- Background Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const menuTrigger = document.querySelector('.site-header__menu-trigger');
+        const body = document.querySelector('body');
+        const menuContainer = document.querySelector('.menu-container');
+        
+        menuTrigger.addEventListener('click', function() {
+          // Toggle scroll and menu active classes
+          body.classList.toggle('no-scroll');
+          menuContainer.classList.toggle('mobile-menu-active');
+        });
+      });
+    </script>
   </header>
+</body>
+
+</html>

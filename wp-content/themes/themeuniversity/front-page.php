@@ -63,87 +63,81 @@ get_header();
             endif;
             wp_reset_postdata();
             ?>
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+            <p class="t-center no-margin"><a href="<?php echo site_url('/su-kiens'); ?>" class="btn btn--blue">View All Events</a></p>
         </div>
     </div>
 
     <div class="full-width-split__two">
-        <div class="full-width-split__inner">
-            <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
-            <?php
-            $args = array(
-                'post_type' => 'post',
-                'posts_per_page' => 2,
-                'orderby' => 'date',
-                'order' => 'DESC',
-            );
+    <div class="full-width-split__inner">
+      <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
+      <?php
+      $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => 2,
+        'orderby' => 'date',
+        'order' => 'DESC',
+      );
 
-            $query = new WP_Query($args);
+      $query = new WP_Query($args);
 
-            if ($query->have_posts()) :
-                while ($query->have_posts()) :
-                    $query->the_post();
-            ?>
-                    <div class="event-summary">
-                        <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
-                            <span class="event-summary__month"><?php the_time('M'); ?></span>
-                            <span class="event-summary__day"><?php the_time('d'); ?></span>
-                        </a>
-                        <div class="event-summary__content">
-                            <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-                            <p><?php the_excerpt(); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Read more</a></p>
-                        </div>
-                    </div>
-            <?php
-                endwhile;
-            else :
-                echo '<p class="t-center">No blog posts found.</p>';
-            endif;
-            wp_reset_postdata();
-            ?>
-            <p class="t-center no-margin"><a href="#" class="btn btn--yellow">View All Blog Posts</a></p>
-        </div>
+      if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+      ?>
+          <div class="event-summary">
+            <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink(); ?>">
+              <span class="event-summary__month"><?php the_time('M') ?></span>
+              <span class="event-summary__day"><?php the_time('d') ?></span>
+            </a>
+            <div class="event-summary__content">
+              <h5 class="event-summary__title headline headline--tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+              <p><?php echo wp_trim_words(get_the_excerpt(), 15, '...'); ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
+            </div>
+          </div>
+      <?php
+        endwhile;
+      endif;
+      wp_reset_postdata();
+      ?>
+      <p class="t-center no-margin"><a href="<?php echo site_url('/blog'); ?>" class="btn btn--yellow">View All Blog Posts</a></p>
     </div>
+  </div>
 </div>
 
 <div class="hero-slider">
-    <div data-glide-el="track" class="glide__track">
-        <div class="glide__slides">
-            <?php
-            $args = array(
-                'post_type' => 'post',
-                'posts_per_page' => 4,
-                'orderby' => 'date',
-                'order' => 'DESC',
-                'category_name' => 'slides'
-            );
+  <div data-glide-el="track" class="glide__track">
+    <div class="glide__slides">
+      <?php
+      $args = array(
+        'post_type' => 'post',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'category_name' => 'slides',
+      );
 
-            $query = new WP_Query($args);
+      $query = new WP_Query($args);
 
-            if ($query->have_posts()) :
-                while ($query->have_posts()) :
-                    $query->the_post();
-            ?>
-                    <div class="hero-slider__slide" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>')">
-                        <div class="hero-slider__interior container">
-                            <div class="hero-slider__overlay">
-                                <h2 class="headline headline--medium t-center"><?php the_title(); ?></h2>
-                                <p class="t-center"><?php the_excerpt(); ?></p>
-                                <p class="t-center no-margin"><a href="<?php the_permalink(); ?>" class="btn btn--blue">Learn more</a></p>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                endwhile;
-            else :
-                echo '<p class="t-center">No slides found.</p>';
-            endif;
-            wp_reset_postdata();
-            ?>
-            <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]"></div>
-        </div>
+      if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+      ?>
+          <div class="hero-slider__slide" style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'large')); ?>');">
+            <div class="hero-slider__interior container">
+              <div class="hero-slider__overlay">
+                <h2 class="headline headline--medium t-center"><?php the_title(); ?></h2>
+                <h3 class="t-center"><?php echo wp_trim_words(get_the_excerpt(), 10, '...'); ?></h3>
+                <p class="t-center no-margin"><a href="<?php the_permalink(); ?>" class="btn btn--blue">Learn more</a></p>
+              </div>
+            </div>
+          </div>
+      <?php
+        endwhile;
+      endif;
+      wp_reset_postdata();
+      ?>
     </div>
+    <div class="glide__bullets slider__bullets" data-glide-el="controls[nav]"></div>
+  </div>
 </div>
+
 
 <?php
 get_footer();
